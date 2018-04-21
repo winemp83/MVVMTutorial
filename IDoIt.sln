@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "ClassLibrary1\Mode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoelOutput", "ConsoleApp1\MoelOutput.csproj", "{3643C052-2352-4B3E-BF56-4EB3E792E201}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelBase", "ViewModelBase\ViewModelBase.csproj", "{A81905EC-0280-4BB5-89EF-C261B9DF6A3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelBase", "..\..\..\Downloads\MVVMTutorial2\MVVMTutorial\ViewModelBase\ViewModelBase.csproj", "{2EC71549-D77F-4860-AB60-0AB201C4F485}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{3643C052-2352-4B3E-BF56-4EB3E792E201}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3643C052-2352-4B3E-BF56-4EB3E792E201}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3643C052-2352-4B3E-BF56-4EB3E792E201}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A81905EC-0280-4BB5-89EF-C261B9DF6A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A81905EC-0280-4BB5-89EF-C261B9DF6A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A81905EC-0280-4BB5-89EF-C261B9DF6A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A81905EC-0280-4BB5-89EF-C261B9DF6A3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC71549-D77F-4860-AB60-0AB201C4F485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC71549-D77F-4860-AB60-0AB201C4F485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC71549-D77F-4860-AB60-0AB201C4F485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC71549-D77F-4860-AB60-0AB201C4F485}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
