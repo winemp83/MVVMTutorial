@@ -10,6 +10,13 @@ namespace Model
         public int PostalCode { get; set; }
         public string City { get; set; }
 
+        public Person(string name = "unknown", string street = "unknown", int plz = 0, string city = "unknown"){
+            Name = name;
+            Street = street;
+            PostalCode = plz;
+            City = city;
+        }
+
         public override bool Equals(object obj)
         {
             var person = obj as Person;
