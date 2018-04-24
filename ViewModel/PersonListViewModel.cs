@@ -1,5 +1,7 @@
 ﻿namespace ViewModel
 {
+    using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Diagnostics;
@@ -7,6 +9,7 @@
     using System.Windows.Input;
     using Model;
     using ViewModelBase;
+    using System.IO;
 
     /// <summary>
     /// A ViewModel for a list of Persons.
@@ -14,6 +17,8 @@
     public class PersonListViewModel : ViewModel
     {
         private ObservableCollection<PersonViewModel> persons;
+        private PersonList pl ;
+        private Funktionen.XMLDB.PersonenXML db = new Funktionen.XMLDB.PersonenXML("Person");
 
         public ObservableCollection<PersonViewModel> Persons
         {
@@ -33,6 +38,7 @@
 
         private ICommand addPersonCommand;
         private ICommand delPersonCommand;
+        private ICommand savePersonCommand;
 
         public ICommand AddPersonCommand
         {
@@ -58,9 +64,21 @@
             }
         }
 
+        public ICommand SavePersonCommand
+        {
+            get
+            {
+                if (savePersonCommand == null)
+                {
+                    savePersonCommand = new RelayCommand(p => ExecuteSavePersonCommand());
+                }
+                return savePersonCommand;
+            }
+        }
+
         private void ExecuteAddPersonCommand()
         {
-            Persons.Add(new PersonViewModel(new Person()));
+            Persons.Add(new PersonViewModel(model: new Person()));
         }
 
         private void ExecuteDelPersonCommand(object state) {
@@ -73,31 +91,56 @@
                 Persons.Remove(_tmp);
         }
 
+        private void ExecuteSavePersonCommand() {
+            try {
+                foreach(PersonViewModel i in persons)
+                {
+                    Debug.WriteLine(i.ToString());
+                }
+            }catch(Exception)
+            {
+                
+            }
+        }
+
         public PersonListViewModel()
         {
-            persons = new ObservableCollection<PersonViewModel>(PersonList.Persons.Select(p => new PersonViewModel(p)));
+            pl = PersonList.Instance();
+            var _tmp = (List<Person>)db.ReadAllPerson();
+            foreach (Person i in _tmp) {
+                pl.Persons.Add(i);
+            }
+            persons = new ObservableCollection<PersonViewModel>(pl.Persons.Select(p => new PersonViewModel(p)));
             persons.CollectionChanged += Persons_CollectionChanged;
         }
 
         void Persons_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            File.Delete("Person.xml");
+            db.CreatePersonDB();
+            foreach(PersonViewModel vm in e.OldItems)
+            {
+                db.WritePersons(vm.Model);
+            }
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (PersonViewModel vm in e.NewItems)
                 {
-                    PersonList.Persons.Add(vm.Model);
+                    pl.Persons.Add(vm.Model);
+                    db.WritePersons(vm.Model);
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 foreach (PersonViewModel vm in e.OldItems)
                 {
-                    PersonList.Persons.Remove(vm.Model);
+                    pl.Persons.Remove(vm.Model);
+                    db.RemovePerson(vm.Model);
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Reset)
             {
-                PersonList.Persons.Clear();
+                pl.Persons.Clear();
             }
         }
 

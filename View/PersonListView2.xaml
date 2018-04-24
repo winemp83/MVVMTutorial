@@ -14,10 +14,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <ListBox ItemsSource="{Binding Persons}" DisplayMemberPath="Name" Name="personList" />
         <Button Command="{Binding AddPersonCommand}" Content="Add Person" Grid.Row="1"/>
         <Button Command="{Binding DelPersonCommand}" Content="Del Person" Grid.Row="2" CommandParameter="{Binding ElementName=personList, Path=SelectedItem.Name}" Name="Del"/>
+        <Button Command="{Binding SavePersonCommand}" Content="Save Persons" Grid.Row="3" />
         <my:PersonView Grid.Column="1" DataContext="{Binding ElementName=personList, Path=SelectedItem}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         
     </Grid>

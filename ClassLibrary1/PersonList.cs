@@ -2,27 +2,36 @@
 
 namespace Model
 {
-    public static class PersonList
+    public class PersonList
     {
-        public static IList<Person> Persons { get; private set; }
+        private static PersonList _PLInstance;
+        public IList<Person> Persons { get; private set; }
 
-        static PersonList()
+        protected PersonList()
         {
-            Persons = new List<Person>()
-        {
-            new Person(){Name = "John Doe",
-                Street = "Onestreet",
-                PostalCode = 12345,
-                City = "Onecity"},
-            new Person(){Name = "Jane Doe",
-                Street = "Onestreet",
-                PostalCode = 12345,
-                City = "Onecity"},
-            new Person(){Name = "Foo Bar",
-                Street = "Twostreet",
-                PostalCode = 54321,
-                City = "Twocity"}
-        };
+            Persons = new List<Person>();
+        }
+
+        public Person AddPerson(){
+            var person = new Person();
+            Persons.Add(person);
+            return person;
+        }
+
+        public static PersonList Instance(){
+            if (_PLInstance == null)
+            {
+                //lock (syncLock)
+                //{
+                    if (_PLInstance == null)
+                    {
+                        _PLInstance = new PersonList();
+                    }
+                //}
+            }
+
+            return _PLInstance;
         }
     }
+    
 }

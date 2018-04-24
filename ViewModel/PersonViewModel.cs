@@ -72,8 +72,6 @@
             }
         }
 
-        public string SelectedUser { get; set; }
-
         public PersonViewModel(Person model)
             : base(model)
         {

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    public class Person
-    {
+    public class Person {
         public string Name { get; set; }
         public string Street { get; set; }
         public int PostalCode { get; set; }
@@ -19,8 +18,7 @@ namespace Model
 
         public override bool Equals(object obj)
         {
-            var person = obj as Person;
-            return person != null &&
+            return obj is Person person &&
                    Name == person.Name &&
                    Street == person.Street &&
                    PostalCode == person.PostalCode &&
